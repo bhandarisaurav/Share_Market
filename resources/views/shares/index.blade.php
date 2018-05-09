@@ -47,6 +47,12 @@
                 <td>{{ $value->total }}</td>
                 <td>{{ $value->date }}</td>
                 <td>
+                    <form action="{{action('ShareController@destroy', $value->id)}}" method="post">
+                        @csrf
+                        <input name="_method" type="hidden" value="DELETE">
+                        <button class="btn btn-danger" onclick="return confirm('Are you Sure?')" type="submit">Delete
+                        </button>
+                    </form>
                     <a class="btn btn-small btn-success" href="{{ URL::to('shares/' . $value->id) }}">View Details</a>
                     <a class="btn btn-small btn-info" href="{{ URL::to('shares/' . $value->id . '/edit') }}">Edit</a>
                 </td>

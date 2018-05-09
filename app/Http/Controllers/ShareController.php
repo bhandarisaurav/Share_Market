@@ -87,6 +87,7 @@ class ShareController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Share::findOrFail($id)->delete();
+        return Redirect('shares')->with('message', 'Data Deleted Successfully!!!');
     }
 }
