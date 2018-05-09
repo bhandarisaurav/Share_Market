@@ -14,7 +14,8 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <h1>View All Data</h1>
+                    <h1>Add New Data</h1>
                 </div>
             </div>
         </div>

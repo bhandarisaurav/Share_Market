@@ -37,7 +37,10 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
-
+                    <ul class="nav navbar-nav">
+                        <li><a class="nav-link" href="{{ URL::to('shares') }}">View All Stocks</a></li>
+                        <li><a class="nav-link" href="{{ URL::to('shares/create') }}">Add New Entry</a></li>
+                    </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

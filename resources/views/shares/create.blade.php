@@ -8,20 +8,13 @@
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <?php //for date select from calender ?>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Styles -->
 
     <script>
         $(document).ready(function() {
             $("#datepicker").datepicker({  maxDate: new Date() });
-        });
-
-        $('#form').submit(function(eventObj) {
-           var input_elements = $("input, number", document.forms[0]);
-            $(this).append('<input type="hidden" name="total" value="'+input_elements+'">');
-            return true;
         });
     </script>
 </head>
@@ -30,19 +23,46 @@
 
     <nav class="navbar navbar-inverse">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ URL::to('shares') }}">Share Data</a>
+            <strong><a class="navbar-brand" href="{{ URL::to('shares') }}">Share Data</a></strong>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="{{ URL::to('shares') }}">View All Stocks</a></li>
             <li><a href="{{ URL::to('shares/create') }}">Add New Entry</a>
         </ul>
+        <!-- Right Side Of Navbar -->
+        <ul class="nav navbar-nav ml-auto navbar-right">
+            <!-- Authentication Links -->
+            @guest
+                <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+            @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <strong>{{ Auth::user()->name }} </strong><span class="caret"></span></a>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endguest
+        </ul>
     </nav>
     <div class="rerun">
-        <div class="container">
+        <div class="container1">
             <div class="card"></div>
             <div class="card">
                 <h1 class="title">Add New Data</h1>
-                <form action="/shares" method="post">
+                <form action="/shares" method="post" id="my-form">
                     {{ csrf_field() }}
                     <div class="input-container">
                         <input type="text" name="name" required="required" autofocus/>
@@ -65,10 +85,10 @@
                         <label for="date">Date</label>
                         <div class="bar"></div>
                     </div>
-                    <input type="hidden" name="total" value="12"/>
+                    <input type="hidden" name="total" id="total"/>
                     <br>
                     <div class="button-container">
-                        <button><span>Go</span></button>
+                        <button type="submit"><span>Go</span></button>
                     </div>
 
                 </form>
@@ -77,5 +97,22 @@
     </div>
 </div>
 
+<script>
+    window.onload = function () {
+        document.getElementById('my-form').onsubmit = function () {
+            const x1 = document.getElementById("nofofshares").value;
+            const x2 = document.getElementById("rate").value;
+            document.getElementById("total").value = x1 * x2;
+            alert(x1 * x2);
+            // alert(document.getElementById("3").value);
+            //
+            // /*
+            //    alert(x1*x2); */
+            // // You must return false to prevent the default form behavior
+            return false;
+        }
+    }
+
+</script>
 </body>
 </html>

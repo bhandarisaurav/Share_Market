@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Share;
 
 class HomeController extends Controller
 {
@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+//        return view('home');
+        $shares = Share::all();
+
+        // load the view and pass the nerds
+        return View('shares.index')->with('shares', $shares);
     }
 }
