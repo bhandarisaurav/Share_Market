@@ -18,7 +18,11 @@
 
     <h1>Stock Data</h1>
     @if (Session::has('message'))
-        <div class="alert alert-info">{{ Session::get('message') }}</div>
+        <div class="alert alert-success  fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ Session::get('message') }}
+
+        </div>
     @endif
 
     <table class="table table-striped table-bordered">

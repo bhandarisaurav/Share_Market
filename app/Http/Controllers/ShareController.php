@@ -39,7 +39,7 @@ class ShareController extends Controller
     public function store(Request $request)
     {
         Share::create($request->all());
-        return Redirect('shares')->with('message', 'Data Added Successfully!!!');;
+        return Redirect('shares')->with('message', 'Data Added Successfully!!!');
     }
 
     /**
@@ -61,7 +61,7 @@ class ShareController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('shares.edit', ['share'=>Share::findOrFail($id)]);
     }
 
     /**
@@ -73,7 +73,10 @@ class ShareController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Share::findOrFail($id);
+        $input = $request->all();
+        $task->fill($input)->save();
+        return Redirect('shares')->with('message', 'Data Updated Successfully!!!');
     }
 
     /**
