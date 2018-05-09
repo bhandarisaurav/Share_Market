@@ -39,7 +39,6 @@ class ShareController extends Controller
     public function store(Request $request)
     {
         Share::create($request->all());
-//        Session::flash('message', 'This is a message!');
         return Redirect('shares')->with('message', 'Data Added Successfully!!!');;
     }
 
@@ -51,7 +50,7 @@ class ShareController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('shares.show', ['share'=>Share::findOrFail($id)]);
     }
 
     /**
