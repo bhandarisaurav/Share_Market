@@ -85,7 +85,7 @@
                         <label for="date">Date</label>
                         <div class="bar"></div>
                     </div>
-                    <input type="hidden" name="total" id="total"/>
+                    <input type="hidden" name="total" id="total" value="1150"/>
                     <br>
                     <div class="button-container">
                         <button type="submit"><span>Go</span></button>
